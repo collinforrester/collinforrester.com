@@ -1,11 +1,8 @@
 ---
 layout: 'default'
-title: 'What now?'
+title: 'New site'
 ---
 
-## Not sure what to do now? Here's some useful links:
+New site in place powered by [DocPad](https://github.com/bevry/docpad).  It's pretty nice.
 
-- [DocPad Wiki](https://github.com/bevry/docpad/wiki)
-- [Getting Started Guide](https://github.com/bevry/docpad/wiki/Getting-Started)
-- [Beginner Guide](https://github.com/bevry/docpad/wiki/Beginner-Guide)
-- [IRC Chat Room](irc://irc.freenode.net/docpad)
+Still getting used to Markdown and in the process I've decided Jade templates are disgusting to look at.

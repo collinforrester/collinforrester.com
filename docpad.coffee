@@ -12,25 +12,25 @@ docpadConfig = {
 		# Specify some site properties
 		site:
 			# The production url of our website
-			url: "http://website.com"
+			url: "http://collinforrester.com"
 
 			# Here are some old site urls that you would like to redirect from
 			oldUrls: [
-				'www.website.com',
-				'website.herokuapp.com'
+				'www.collinforrester.com',
+				'blog.collinforrester.com'
 			]
 
 			# The default title of our website
-			title: "Your Website"
+			title: "$.collin.forrester()"
 
 			# The website description (for SEO)
 			description: """
-				When your website appears in search results in say Google, the text here will be shown underneath your website's title.
+				Collin's personal website, findings, and blog.
 				"""
 
 			# The website keywords (for SEO) separated by commas
 			keywords: """
-				place, your, website, keywoards, here, keep, them, related, to, the, content, of, your, website
+				JavaScript, Android, Web Development, Front End, iOS, Mobile Web, Node, NPM, Awesome
 				"""
 
 
@@ -120,7 +120,7 @@ docpadConfig = {
 
 			# Make sure to register a grunt `default` task
 			command = ["#{rootPath}/node_modules/.bin/grunt", 'default']
-			
+
 			# Execute
 			balUtil.spawn command, {cwd:rootPath,output:true}, ->
 				src = []
