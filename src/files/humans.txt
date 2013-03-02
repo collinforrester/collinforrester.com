@@ -3,11 +3,11 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    <Collin Forrester> -- <Developer, Writer, Designer> -- <@cforrester07>
 
 # THANKS
 
-    <name>
+    <Collin Forrester>
 
 # TECHNOLOGY COLOPHON
 
