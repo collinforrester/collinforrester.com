@@ -94,7 +94,16 @@ textarea {
    site custom styles
    ========================================================================== */
 
-
+/* Load some fonts brah */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Regular'), local('Roboto-Regular'), url(http://themes.googleusercontent.com/static/fonts/roboto/v7/CrYjSnGjrRCn0pd9VQsnFOvvDin1pK8aKteLpeZ5c0A.woff) format('woff');
+}
+body {
+    font-family: 'Roboto';
+}
 
 
 

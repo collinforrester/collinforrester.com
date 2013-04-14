@@ -21,7 +21,7 @@ docpadConfig = {
 			]
 
 			# The default title of our website
-			title: "$.collin.forrester()"
+			title: "Collin Forrester"
 
 			# The website description (for SEO)
 			description: """

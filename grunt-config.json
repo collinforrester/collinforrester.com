@@ -5,7 +5,7 @@
       "dest": "out/scripts/all.js"
     },
     "css": {
-      "src": ["out/vendor/normalize.css","out/styles/style.css", "out/styles/bootstrap.css"],
+      "src": ["out/vendor/normalize.css","out/styles/bootstrap.css","out/styles/style.css"],
       "dest": "out/styles/all.css"
     }
   },

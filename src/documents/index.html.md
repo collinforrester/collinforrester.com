@@ -1,9 +1,9 @@
 ---
 layout: 'default'
-title: 'Welcome'
+title: 'Collin Forrester'
 ---
 
 You've reached the home page of Collin Forrester.  This page is in progress.
 
-New site in place powered by [DocPad](https://github.com/bevry/docpad).  It's pretty nice.
-Still getting used to Markdown and in the process I've decided Jade templates are disgusting to look at.
+New site in place powered by [DocPad](https://github.com/bevry/docpad).
+The source for this page is available on [Github](https://github.com/collinforrester/collinforrester.com).
