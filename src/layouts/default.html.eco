@@ -1,75 +1,95 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html lang="en">
 <head>
-	<!-- Standard Meta -->
+	<!-- Meta -->
 	<meta charset="utf-8" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<!-- Mobile viewport optimized: h5bp.com/viewport -->
 	<meta name="viewport" content="width=device-width" />
 
-	<!-- Site Properities -->
+	<!-- Our site title and description -->
 	<title><%= @getPreparedTitle() %></title>
 	<meta name="description" content="<%= @getPreparedDescription() %>" />
 	<meta name="keywords" content="<%= @getPreparedKeywords() %>" />
+	<meta name="author" content="<%= @site.author or '' %>" />
 
-	<!-- DocPad Meta -->
+	<!-- DocPad Meta Information -->
 	<%- @getBlock('meta').toHTML() %>
 
-	<!-- DocPad Styles + Our Own -->
-	<%- @getBlock('styles').add(@getGruntedStyles()).toHTML() %>
 
 	<!-- Icons -->
-	<!-- Favicon -->
-	<link rel="shortcut icon" href="/icons/favicon.ico" />
-	<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
-	<link rel="apple-touch-icon-precomposed" href="icons/apple-touch-icon-57x57-precomposed.png" />
-	<!-- For first- and second-generation iPad: -->
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="icons/apple-touch-icon-72x72-precomposed.png" />
-	<!-- For iPhone with high-resolution Retina display: -->
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="icons/apple-touch-icon-114x114-precomposed.png" />
-	<!-- For third-generation iPad with high-resolution Retina display: -->
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="icons/apple-touch-icon-144x144-precomposed.png" />
+    <link rel="shortcut icon" href="ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+
+
+	<!-- Shims: IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+		<script async src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+
+	<!-- Styles -->
+	<%- @getBlock('styles').add(["/styles/styles.css"]).toHTML() %>
+
+
+	<!-- Fonts -->
+    <link rel="stylesheet" href="fonts/syte/css/syte.css">
+    <!--[if IE 7]><link rel="stylesheet" href="fonts/syte/css/syte-ie7.css"><![endif]-->
 </head>
 <body>
-    <!--[if lt IE 7]>
-        <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
-    <![endif]-->
-	<div>
-		<header>
-			<h1>Collin Forrester</h1>
-			<a href='/index.html'>Home</a>
-		</header>
-		<div>
-			<article >
-				<%- @content %>
-			</article>
-			<% for post in @getFilesAtPath("posts").toJSON(): %>
-				<article >
-			    <a href="<%= post.url %>"><%= post.title %></a><br/>
-				</article>
-			<% end %>
-		</div>
+	<header class="main-header">
+		<hgroup>
+			<div class="picture">
+				<a href="/" rel="home"></a>
+			</div>
+			<h1><%- @site.heading %></h1>
+			<h2><%- @site.subheading %></h2>
+		</hgroup>
+		<nav>
+			<ul class="main-nav">
+				<li><a href="/" id="home-link">Home</a></li>
+				<% for socialID,socialAccount of @site.social: %>
+					<li><a href="<%= socialAccount.url %>" class="social-link" data-socialid="<%= socialID %>" target="_blank"><%= socialAccount.name %> <% unless socialAccount.profile: %><span class="icon-link"/><% end %></a></li>
+				<% end %>
+				<li><a href="mailto:<%= @site.email %>?subject=Hello" id="contact-link">Contact <span class="icon-link"/></a></li>
+			</ul>
+		</nav>
+		<% if @site.sourceUrl: %>
+			<a href="<%= @site.sourceUrl %>" class="fork-me">Fork me on Github</a>
+		<% end %>
+	</header>
+
+	<!-- Page Content -->
+	<%- @content %>
+
+	<div class="mobile-nav">
+		<span class="nav-btn" id="mobile-nav-btn">
+			<span class="nav-btn-bar"></span>
+			<span class="nav-btn-bar"></span>
+			<span class="nav-btn-bar"></span>
+		</span>
+		<h3><a href="/"><%= @site.url %></a></h3>
 	</div>
-	<footer>
 
-	</footer>
+	<!-- Analytic Accounts -->
+	<% for analyticsID,analyticsAccount of @site.analytics: %>
+		<%- @partial("analytics/#{analyticsID}.html.eco", {account:@analyticsAccount}) %>
+	<% end %>
 
-	<!-- DocPad Scripts + Our Own -->
-	<%- @getBlock('scripts').add(@getGruntedScripts()).toHTML() %>
+	<!-- Scripts -->
+	<%- @getBlock('scripts').add(["/vendor/jquery.js","/vendor/log.js","/vendor/modernizr.js","/scripts/script.js"]).toHTML() %>
 
-	<script type="text/javascript">
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-36540785-1']);
-	  _gaq.push(['_setDomainName', 'collinforrester.com']);
-	  _gaq.push(['_setAllowLinker', true]);
-	  _gaq.push(['_trackPageview']);
-	  (function() {
-	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-	</script>
+	<!-- Social Profiles -->
+	<div class="modal-backdrop fade" style="display:none"></div>
+	<% for socialID,socialAccount of @site.social: %>
+		<% if socialAccount.profile: %>
+			<%- @partial("social/#{socialID}.html.hb", @getSocialFeeds(socialID)) %>
+		<% end %>
+	<% end %>
 </body>
 </html>

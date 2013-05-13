@@ -1,0 +1,4 @@
+@charset "UTF-8";
+
+
+.icon-link:before { content: '🔗'; } /* '\1f517' */

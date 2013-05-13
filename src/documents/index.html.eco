@@ -1,0 +1,5 @@
+---
+layout: default
+---
+
+<%- @partial('content/list.html.eco', {posts:@feedr.feeds.tumblr.response.posts}) %>

@@ -1,0 +1,2 @@
+<script src="http://include.reinvigorate.net/re_.js"></script>
+<script>reinvigorate.track("<%= @account %>")</script>
