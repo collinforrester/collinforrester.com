@@ -1,52 +1,63 @@
 {
-	"name": "html5-boilerplate-frontend.docpad",
-	"version": "0.1.0",
-	"private": true,
-	"description": "HTML5 Boilerplate skeleton for DocPad. Bare essentials for building a modern website with best practices. Adds frontend plugins asset compilation.",
-	"homepage": "https://github.com/lukekarrys/html5-boilerplate.docpad",
-	"keywords": [
-		"docpad-skeleton",
-		"docpad",
-		"website",
-		"skeleton",
-		"html5 boilerplate",
-		"h5bp",
-		"grunt"
-	],
-	"author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
-	"maintainers": [
-		"Luke Karrys (http://lukekarrys.com)"
-	],
-	"contributors": [
-		"Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
-		"Luke Karrys (http://lukekarrys.com)"
-	],
-	"bugs": {
-		"url": "https://github.com/lukekarrys/html5-boilerplate.docpad/issues"
-	},
-	"repository" : {
-		"type" : "git",
-		"url" : "http://github.com/lukekarrys/html5-boilerplate.docpad.git"
-	},
-	"engines" : {
-		"node": "0.8.x",
-		"npm": "1.1.x"
-	},
-	"dependencies": {
-		"docpad": "6.x",
-		"docpad-plugin-coffeescript": "2.x",
-		"docpad-plugin-eco": "2.x",
-		"docpad-plugin-marked": "2.x",
-		"docpad-plugin-partials": "2.x",
-		"docpad-plugin-stylus": "2.x",
-		"docpad-plugin-text": "2.x",
-		"grunt": "~0.3.17",
-		"grunt-css": "~0.3.2",
-		"bal-util": "~1.15.3",
-		"underscore": "~1.4.3"
-	},
-	"devDependencies": {
-		"docpad-plugin-livereload": "2.x"
-	},
-	"main": "node_modules/docpad/bin/docpad-server"
+  "name": "syte.docpad",
+  "version": "0.8.1",
+  "description": "A simple pre-made personal website with blogging and social integrations.",
+  "homepage": "https://github.com/docpad/syte.docpad",
+  "keywords": [
+    "docpad-skeleton",
+    "docpad",
+    "website",
+    "syte",
+    "blog",
+    "blogging",
+    "social",
+    "bitbucket",
+    "dribble",
+    "foursquare",
+    "github",
+    "instagram",
+    "lastfm",
+    "soundcloud",
+    "twitter"
+  ],
+  "author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
+  "maintainers": [
+    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+  ],
+  "contributors": [
+    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
+    "Rodrigo Neri <@rigoneri> (https://github.com/rigoneri)"
+  ],
+  "bugs": {
+    "url": "https://github.com/docpad/syte.docpad/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/docpad/syte.docpad.git"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  },
+  "dependencies": {
+    "moment": "1.7.x",
+    "docpad": "6.x",
+    "feedr":"",
+    "docpad-plugin-cachr": "2.x",
+    "docpad-plugin-cleanurls": "2.x",
+    "docpad-plugin-coffeescript": "2.x",
+    "docpad-plugin-coffeekup": "2.x",
+    "docpad-plugin-eco": "2.x",
+    "docpad-plugin-feedr": "2.x",
+    "docpad-plugin-handlebars": "2.x",
+    "docpad-plugin-js2coffee": "2.x",
+    "docpad-plugin-less": "2.x",
+    "docpad-plugin-robotskirt": "2.x",
+    "docpad-plugin-partials": "2.x",
+    "docpad-plugin-text": "2.x"
+  },
+  "devDependencies": {
+    "docpad-plugin-livereload": "2.x"
+  },
+  "main": "node_modules/docpad/bin/docpad-server"
 }
