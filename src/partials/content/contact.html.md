@@ -1,0 +1,2 @@
+## Contact
+I'm available in many different places.  An always reliable way to contact me is [twitter](http://twitter.com/cforrester07). For other, longer inqueries please contact me at my [personal email](mailto:collin.forrester@gmail.com).

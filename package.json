@@ -1,60 +1,47 @@
 {
-  "name": "syte.docpad",
-  "version": "0.8.1",
-  "description": "A simple pre-made personal website with blogging and social integrations.",
-  "homepage": "https://github.com/docpad/syte.docpad",
+  "name": "balupton.docpad",
+  "version": "1.2.5",
+  "description": "Website of Benjamin Lupton. Founder of Bevry, DocPad and HistoryJS. Aficionado of HTML5, CoffeeScript and NodeJS. Available for consulting, training and talks. ENTP.",
+  "homepage": "https://github.com/balupton/balupton.docpad",
   "keywords": [
-    "docpad-skeleton",
-    "docpad",
+    "balupton",
+    "benjamin lupton",
     "website",
-    "syte",
-    "blog",
-    "blogging",
-    "social",
-    "bitbucket",
-    "dribble",
-    "foursquare",
-    "github",
-    "instagram",
-    "lastfm",
-    "soundcloud",
-    "twitter"
+    "docpad"
   ],
-  "author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
+  "author": "Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
   "maintainers": [
     "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
   ],
   "contributors": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
-    "Rodrigo Neri <@rigoneri> (https://github.com/rigoneri)"
+    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
   ],
   "bugs": {
-    "url": "https://github.com/docpad/syte.docpad/issues"
+    "url": "https://github.com/balupton/balupton.docpad/issues"
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/docpad/syte.docpad.git"
+    "url": "http://github.com/balupton/balupton.docpad.git"
   },
   "engines": {
-    "node": "0.8.x",
-    "npm": "1.1.x"
+    "node": "0.10",
+    "npm": "1.2"
   },
   "dependencies": {
-    "moment": "1.7.x",
-    "docpad": "6.x",
-    "feedr":"",
+    "docpad": "~6.33.0",
     "docpad-plugin-cachr": "2.x",
     "docpad-plugin-cleanurls": "2.x",
-    "docpad-plugin-coffeescript": "2.x",
     "docpad-plugin-coffeekup": "2.x",
+    "docpad-plugin-coffeescript": "2.x",
     "docpad-plugin-eco": "2.x",
     "docpad-plugin-feedr": "2.x",
-    "docpad-plugin-handlebars": "2.x",
-    "docpad-plugin-js2coffee": "2.x",
-    "docpad-plugin-less": "2.x",
-    "docpad-plugin-robotskirt": "2.x",
+    "docpad-plugin-marked": "2.x",
     "docpad-plugin-partials": "2.x",
-    "docpad-plugin-text": "2.x"
+    "docpad-plugin-services": "2.x",
+    "docpad-plugin-stylus": "2.x",
+    "docpad-plugin-text": "2.x",
+    "feedr": "~2.4.4",
+    "moment": "~2.0.0"
   },
   "devDependencies": {
     "docpad-plugin-livereload": "2.x"

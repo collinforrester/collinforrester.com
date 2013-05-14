@@ -1,287 +1,340 @@
 # =================================
-# Environment Configuration
+# Misc Configuration
 
-# Prepare
-queryEngine = require('docpad').queryEngine
-feedr = new (require('feedr').Feedr)
 envConfig = process.env
-tumblrPosts = null
-tumblrPostsInTag = {}
-tumblrTags = []
+githubAuthString = "client_id=#{envConfig.BALUPTON_GITHUB_CLIENT_ID}&client_secret=#{envConfig.BALUPTON_GITHUB_CLIENT_SECRET}"
+getRankInUsers = (users, fallback=null) ->
+	rank = null
+
+	for user,index in users
+		if user.login is 'balupton'
+			rank = String(index+1)
+			break
+
+	return fallback  if rank is null
+
+	if rank >= 10 and rank < 20
+		rank += 'th'
+	else switch rank.substr(-1)
+		when '1'
+			rank += 'st'
+		when '2'
+			rank += 'nd'
+		when '3'
+			rank += 'rd'
+		else
+			rank += 'th'
+
+	return rank or fallback
 
 
 # =================================
 # DocPad Configuration
 
-# The DocPad Configuration File
-# It is simply a CoffeeScript Object which is parsed by CSON
-module.exports = {
-	# =================================
-	# DocPad Options
-
-	# Regenerate Every
-	# Performs a rengeraete every x milliseconds, useful for always having the latest data
-	regenerateEvery: 60*60*1000 # hour
-
+module.exports =
+	regenerateEvery: 1000*60*60  # hour
 
 	# =================================
 	# Template Data
 	# These are variables that will be accessible via our templates
 	# To access one of these within our templates, refer to the FAQ: https://github.com/bevry/docpad/wiki/FAQ
+
 	templateData:
-
-		# Moment
-		moment: require('moment')
-
-		# Specify the theme we are using
-		theme: "metro"
-
-		# Specify some site properties
+		# Site Data
 		site:
-			# The production url of our website
-			url: "http://collinforrester.com"
-
-			# The default title of our website
-			title: "Collin Forrester"
-
-			# The website author's name
-			author: "Collin Forrester"
-
-			# The website author's email
-			email: "collin.forrester@gmail.com"
-
-			# The website heading to be displayed on the page
-			heading: 'Collin Forrester'
-
-			# The website subheading to be displayed on the page
-			subheading: """
-				Welcome to your new <t>links.docpad</t> website!
-				"""
-
-			# Footer
-			footnote: """
-				This website was created with <t>links.bevry</t>’s <t>links.docpad</t>
-				"""
-			copyright: """
-				Your chosen license should go here... Not sure what a license is? Refer to the <code>README.md</code> file included in this website.
-				"""
-
-			# The website description (for SEO)
+			url: "http://balupton.com"
+			title: "Benjamin Lupton"
+			author: "Benjamin Lupton"
+			email: "b@lupton.cc"
 			description: """
-				When your website appears in search results in say Google, the text here will be shown underneath your website's title.
+				Website of Benjamin Lupton. Founder of Bevry, DocPad and HistoryJS. Aficionado of HTML5, CoffeeScript and NodeJS. Available for consulting, training and talks. ENTP.
 				"""
-
-			# The website keywords (for SEO) separated by commas
 			keywords: """
-				place, your, website, keywoards, here, keep, them, related, to, the, content, of, your, website
+				balupton, benjamin lupton, lupton, coffeescript, node.js, javascript, history.js, html5, docpad, nowpad, jquery, css3, ruby, git, nosql, cson, html5 history api, ajax, html, web development, web design, nlp, git, neuro-linguistic programming, programming, hacking, hackathon, aloha editor, contenteditable, hallo, jekyll, entp, inventor, web 2.0
 				"""
 
-			# The website analytics codes for various servers
-			analytics:
-				# ReInvigorate is a real-time analytics service
-				reinvigorate: false # instead of false, use your reinvigorate tracker id here
+			text:
+				heading: "Benjamin Lupton"
+				subheading: '''
+					<t render="html.coffee">
+						link = @getPreparedLink.bind(@)
+						text """
+							Founder of #{link 'bevry'}, #{link 'docpad'}, #{link 'historyjs'}  &amp; #{link 'hostel'}.<br/>
+							Aficionado of #{link 'javascript'}, #{link 'nodejs'}, #{link 'opensource'} and #{link 'html5'}.<br/>
+							Available for consulting, training and speaking. #{link 'contact'}.
+							"""
+					</t>
+					'''
+				about: '''
+					<t render="html.coffee">
+						link = @getPreparedLink.bind(@)
+						text """
+							This website was created with #{link 'bevry'}’s #{link 'docpad'} and is #{link 'source'}
+							"""
+					</t>
+					'''
+				copyright: '''
+					<t render="html.md">
+						Unless stated otherwise; all works are Copyright © 2011+ [Benjamin Lupton](http://balupton.com) and licensed [permissively](http://en.wikipedia.org/wiki/Permissive_free_software_licence) under the [MIT License](http://creativecommons.org/licenses/MIT/) for code and the [Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/) for everything else (including content, media and design), enjoy!
+					</t>
+					'''
 
-				# Google Analytics is the most popular analytics service
-				google: false  # instead of false, use your google analytics tracker id here
+			services:
+				facebookLikeButton:
+					applicationId: '266367676718271'
+				facebookFollowButton:
+					applicationId: '266367676718271'
+					username: 'balupton'
+				twitterTweetButton: "balupton"
+				twitterFollowButton: "balupton"
+				githubFollowButton: "balupton"
+				quoraFollowButton: "Benjamin-Lupton"
+				disqus: 'balupton'
+				gauges: '5077ae93f5a1f5067b000028'
+				googleAnalytics: 'UA-4446117-1'
+				reinvigorate: '52uel-236r9p108l'
 
+			social:
+				"""
+				flattr
+				facebook
+				linkedin
+				github
+				twitter
+				youtube
+				vimeo
+				""".trim().split('\n')
 
-			# Specify some feed available for the visitors of our website
+			scripts: """
+				/vendor/jquery-1.7.1.js
+				/vendor/fancybox-2.0.5/jquery.fancybox.js
+				/scripts/script.js
+				""".trim().split('\n')
+
 			feeds: [
-					# This is the feed generated by our DocPad website
-					# It contains all the posts, you can find the source file in src/documents/atom.xml.eco
-					href: 'http://collinforrester.com/atom.xml'
-					name: 'Blog Posts'
+					href: 'http://feeds.feedburner.com/balupton.atom'
+					title: 'Blog Posts'
 				,
-					# DocPad's Twitter Stream
-					# Included here as an example that you can include feed from anywhere
-					href: 'https://api.twitter.com/1/statuses/user_timeline.atom?screen_name=docpad&count=20&include_entities=true&include_rts=true'
-					name: 'DocPad Tweets'
+					href: 'https://github.com/balupton.atom'
+					title: 'GitHub Activity'
+				,
+					href: 'http://vimeo.com/api/v2/balupton/videos.atom'
+					title: 'Vimeo Videos'
+				,
+					href: 'http://api.flickr.com/services/feeds/photos_public.gne?id=35776898@N00&lang=en-us&format=atom'
+					title: 'Flickr Photos'
+				,
+					href: 'https://api.twitter.com/1/statuses/user_timeline.atom?screen_name=balupton&count=20&include_entities=true&include_rts=true'
+					title: 'Tweets'
 			]
 
+			pages: [
+					url: '/'
+					match: '/index'
+					label: 'home'
+					title: 'Return home'
+				,
+					url: '/projects'
+					label: 'projects'
+					title: 'View projects'
+				,
+					url: '/blog'
+					label: 'blog'
+					title: 'View articles'
+			]
 
-			# Do you have social accounts?
-			# Mention them here and our layout will include them in the sidebar
-			# If you specify a feed for the Feedr plugin (specified later on)
-			# then we will pull in their feed data too for recognised services
-			social:
-				# Twitter
-				twitter:
-					name: 'Twitter'
-					url: "https://twitter.com/#{envConfig.TWITTER_USERNAME}"
-					profile:
-						feeds:
-							tweets: 'twitter'
+			links:
+				docpad:
+					text: 'DocPad'
+					url: 'http://docpad.org'
+					title: 'Visit Website'
+				hostel:
+					text: 'Startup Hostel'
+					url: 'http://startuphostel.org'
+					title: 'Visit Website'
+				backbonejs:
+					text: 'Backbone.js'
+					url: 'http://backbonejs.org'
+					title: 'Visit Website'
+				historyjs:
+					text: 'History.js'
+					url: 'http://historyjs.net'
+					title: 'Visit Website'
+				bevry:
+					text: 'Bevry'
+					url: 'http://bevry.me'
+					title: 'Visit Website'
+				services:
+					text: 'Services'
+					url: 'http://bevry.me/services'
+					title: "View my company's services"
+				opensource:
+					text: 'Open-Source'
+					url: 'http://en.wikipedia.org/wiki/Open-source_software'
+					title: 'Visit on Wikipedia'
+				html5:
+					text: 'HTML5'
+					url: 'http://en.wikipedia.org/wiki/HTML5'
+					title: 'Visit on Wikipedia'
+				javascript:
+					text: 'JavaScript'
+					url: 'http://en.wikipedia.org/wiki/JavaScript'
+					title: 'Visit on Wikipedia'
+				nodejs:
+					text: 'Node.js'
+					url: 'http://nodejs.org/'
+					title: 'Visit Website'
+				balupton:
+					text: 'Benjamin Lupton'
+					url: 'http://balupton.com'
+					title: 'Visit Website'
+				author:
+					text: 'Benjamin Lupton'
+					url: 'http://balupton.com'
+					title: 'Visit Website'
+				source:
+					text: 'open-source'
+					url: 'https://github.com/balupton/balupton.docpad'
+					title: 'View Website Source'
+				contact:
+					text: 'Contact'
+					url: 'mailto:b@bevry.me'
+					title: 'Contact me'
+					cssClass: 'contact-button'
 
-				# GitHub
-				github:
-					name: 'GitHub'
-					url: "https://github.com/#{envConfig.GITHUB_USERNAME}"
-					profile:
-						feeds:
-							user: 'githubUser'
-							repos: 'githubRepos'
+		# Link Helper
+		getPreparedLink: (name) ->
+			link = @site.links[name]
+			renderedLink = """
+				<a href="#{link.url}" title="#{link.title}" class="#{link.cssClass or ''}">#{link.text}</a>
+				"""
+			return renderedLink
 
+		# Meta Helpers
+		getPreparedTitle: -> if @document.title then "#{@document.title} | #{@site.title}" else @site.title
+		getPreparedAuthor: -> @document.author or @site.author
+		getPreparedEmail: -> @document.email or @site.email
+		getPreparedDescription: -> @document.description or @site.description
+		getPreparedKeywords: -> @site.keywords.concat(@document.keywords or []).join(', ')
 
-		# -----------------------------
-		# Common links used throughout the website
-
-		links:
-			docpad: '<a href="https://github.com/bevry/docpad" title="Visit on GitHub">DocPad</a>'
-			historyjs: '<a href="https://github.com/balupton/history.js" title="Visit on GitHub">History.js</a>'
-			bevry: '<a href="http://bevry.me" title="Visit Website">Bevry</a>'
-			opensource: '<a href="http://en.wikipedia.org/wiki/Open-source_software" title="Visit on Wikipedia">Open-Source</a>'
-			html5: '<a href="http://en.wikipedia.org/wiki/HTML5" title="Visit on Wikipedia">HTML5</a>'
-			javascript: '<a href="http://en.wikipedia.org/wiki/JavaScript" title="Visit on Wikipedia">JavaScript</a>'
-			nodejs: '<a href="http://nodejs.org/" title="Visit Website">Node.js</a>'
-			author: '<a href="http://collinforrester.com" title="Visit Website">Collin Forrester</a>'
-			cclicense: '<a href="http://creativecommons.org/licenses/by/3.0/" title="Visit Website">Creative Commons Attribution License</a>'
-			mitlicense: '<a href="http://creativecommons.org/licenses/MIT/" title="Visit Website">MIT License</a>'
-			contact: '<a href="mailto:collin.forrester@gmail.com" title="Email me">Email</a>'
-
-
-		# -----------------------------
-		# Helper Functions
-
-		# Get Gravatar URL
-		getGravatarUrl: (email,size) ->
-			hash = require('crypto').createHash('md5').update(email).digest('hex')
-			url = "http://www.gravatar.com/avatar/#{hash}.jpg"
-			if size then url += "?s=#{size}"
-			return url
-
-		# Get Profile Feeds
-		getSocialFeeds: (socialID) ->
-			feeds = {}
-			for feedID,feedKey of @site.social[socialID].profile.feeds
-				feeds[feedID] = @feedr.feeds[feedKey]
-			return feeds
-
-		# Get the prepared site/document title
-		# Often we would like to specify particular formatting to our page's title
-		# we can apply that formatting here
-		getPreparedTitle: ->
-			# if we have a document title, then we should use that and suffix the site's title onto it
-			if @document.title
-				"#{@document.title} | #{@site.title}"
-			# if our document does not have it's own title, then we should just use the site's title
+		# Ranking Helpers
+		getAustraliaJavaScriptRank: ->
+			feed = @feedr.feeds['github-australia-javascript']?.users ? null
+			return getRankInUsers(feed,'2nd')
+		getAustraliaRank: ->
+			feed = @feedr.feeds['github-australia']?.users ? null
+			return getRankInUsers(feed,'4th')
+		getGithubFollowers: (floorToNearest=50) ->
+			followers = @feedr.feeds['github-profile']?.followers
+			if followers
+				result = Math.floor(followers/floorToNearest)*floorToNearest
 			else
-				@site.title
-
-		# Get the prepared site/document description
-		getPreparedDescription: ->
-			# if we have a document description, then we should use that, otherwise use the site's description
-			@document.description or @site.description
-
-		# Get the prepared site/document keywords
-		getPreparedKeywords: ->
-			# Merge the document keywords with the site keywords
-			@site.keywords.concat(@document.keywords or []).join(', ')
+				result = 250
+			return result
+		getStackoverflowReputation: (floorToNearest=1000) ->
+			reputation = @feedr.feeds['stackoverflow-profile']?.users?[0]?.reputation ? null
+			if reputation
+				result = Math.floor(reputation/floorToNearest)*floorToNearest
+			else
+				result = 9000
+			return result
 
 
 	# =================================
 	# Collections
-	# These are special collections that our website makes available to us
 
 	collections:
-		# For instance, this one will fetch in all documents that have pageOrder set within their meta data
-		pages: (database) ->
-			database.findAllLive({pageOrder: $exists: true}, [pageOrder:1,title:1])
+		pages: ->
+			@getCollection('documents').findAllLive({pageOrder:$exists:true},[pageOrder:1])
 
-		# This one, will fetch in all documents that have the tag "post" specified in their meta data
-		posts: (database) ->
-			database.findAllLive({relativeOutDirPath:'posts'},[date:-1])
+		posts: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'blog'},[date:-1])
+
 
 	# =================================
 	# Events
 
 	events:
 
-		# Fetch our Tumblr Posts
-		docpadReady: (opts,next) ->
-
-			# Check
-			return next()  if tumblrPosts? or envConfig.TUMBLR_BLOG? is false
-
+		serverExtend: (opts) ->
 			# Prepare
-			tumblrUrl = "http://api.tumblr.com/v2/blog/#{envConfig.TUMBLR_BLOG}/posts?api_key=#{envConfig.TUMBLR_API_KEY}"
-			tumblrPosts = []
+			docpadServer = opts.server
 
-			# Read feeds
-			feedr.readFeed tumblrUrl, (err,feedData) ->
-				# Check
-				return next(err)  if err
+			# ---------------------------------
+			# Server Configuration
 
-				# Concat the posts
-				tumblrPosts = tumblrPosts.concat(feedData.response.posts)
+			# Redirect Middleware
+			docpadServer.use (req,res,next) ->
+				if req.headers.host in ['www.balupton.com','lupton.cc','www.lupton.cc','balupton.no.de','balupton.herokuapp.com']
+					res.redirect 301, 'http://balupton.com'+req.url
+				else
+					next()
 
-				# Fetch the remaining posts
-				totalPosts = feedData.response.blog.posts
-				feeds = []
-				for offset in [20...totalPosts] by 20
-					feeds.push(tumblrUrl+'&offset='+offset)
-				feedr.readFeeds feeds, (err,feedsData) ->
-					# Check
-					return next(err)  if err
+			# ---------------------------------
+			# Server Extensions
 
-					# Concat the posts
-					for feedData in feedsData
-						tumblrPosts = tumblrPosts.concat(feedData.response.posts)
+			# Demos
+			docpadServer.get /^\/sandbox(?:\/([^\/]+).*)?$/, (req, res) ->
+				project = req.params[0]
+				res.redirect 301, "http://balupton.github.com/#{project}/demo/"
+				# ^ github pages don't have https
 
-					# Concat the tags
-					for tumblrPost in tumblrPosts
-						for tumblrPostTag in tumblrPost.tags
-							if tumblrPostsInTag[tumblrPostTag]?
-								tumblrPostsInTag[tumblrPostTag] = [tumblrPost]
-							else
-								tumblrPostsInTag[tumblrPostTag].push(tumblrPost)
-					tumblrTags = Object.keys(tumblrPostsInTag)
+			# Projects
+			docpadServer.get /^\/projects\/(.*)$/, (req, res) ->
+				project = req.params[0] or ''
+				res.redirect 301, "https://github.com/balupton/#{project}"
 
-					# Done
-					return next(err)
+			docpadServer.get /^\/(?:g|gh|github)(?:\/(.*))?$/, (req, res) ->
+				project = req.params[0] or ''
+				res.redirect 301, "https://github.com/balupton/#{project}"
 
-			# Done
-			return
+			# Twitter
+			docpadServer.get /^\/(?:t|twitter|tweet)(?:\/(.*))?$/, (req, res) ->
+				res.redirect 301, "https://twitter.com/balupton"
 
-		# Add our tumblr posts to the template data
-		extendTemplateData: (opts) ->
-			# Prepare
-			templateData = opts.templateData
+			# Sharing Feed
+			docpadServer.get /^\/feeds?\/shar(e|ing)(?:\/(.*))?$/, (req, res) ->
+				res.redirect 301, "http://feeds.feedburner.com/balupton/shared"
 
-			# Add the tumblr posts to the template data
-			templateData.tumblrPosts = tumblrPosts
-			templateData.tumblrPostsInTag = tumblrPostsInTag
-			templateData.tumblrTags = tumblrTags
-
-			# Done
-			return
-
-		# Add our tumblr tag pages to our documents collection
-		#populateCollections: (opts) ->
-			# Prepare
-
-		#	docpad.renderPath(partial.path, {templateData:partial.data}, next)
+			# Feeds
+			docpadServer.get /^\/feeds?(?:\/(.*))?$/, (req, res) ->
+				res.redirect 301, "http://feeds.feedburner.com/balupton"
 
 
 	# =================================
 	# Plugin Configuration
-	# This is where we configure the different plugins that are loaded with DocPad
-	# To configure a plugin, specify it's name, and then the options you want to configure it with
 
 	plugins:
-
-		# Configure the Feedr Plugin
-		# The Feedr Plugin will pull in remote feeds specified here and make their contents available to our templates
 		feedr:
-
-			# These are the feeds that Feedr will pull in
 			feeds:
-				# Twitter
-				twitter: url: "https://api.twitter.com/1/statuses/user_timeline.json?screen_name=#{envConfig.TWITTER_USERNAME}&count=50&include_entities=false&include_rts=false&exclude_replies=true"
+				'stackoverflow-profile':
+					url: 'http://api.stackoverflow.com/1.0/users/130638/'
+				'github-australia-javascript':
+					url: "https://api.github.com/legacy/user/search/location:Australia%20language:JavaScript?#{githubAuthString}"
+				'github-australia':
+					url: "https://api.github.com/legacy/user/search/location:Australia?#{githubAuthString}"
+					# https://github.com/search?q=location%3AAustralia&type=Users&s=followers
+				'github-profile':
+					url: "https://api.github.com/users/balupton?#{githubAuthString}"
+				'balupton-projects':
+					url: "https://api.github.com/users/balupton/repos?per_page=100&#{githubAuthString}"
+				'bevry-projects':
+					url: "https://api.github.com/users/bevry/repos?per_page=100&#{githubAuthString}"
+				'browserstate-projects':
+					url: "https://api.github.com/users/browserstate/repos?per_page=100&#{githubAuthString}"
+				'docpad-projects':
+					url: "https://api.github.com/users/docpad/repos?per_page=100&#{githubAuthString}"
+				#'flattr':
+				#	url: 'https://api.flattr.com/rest/v2/users/balupton/activities.atom'
+				'github':
+					url: "https://github.com/balupton.atom"
+				'twitter':
+					url: "https://api.twitter.com/1/statuses/user_timeline.json?screen_name=balupton&count=20&include_entities=true&include_rts=true"
+				'vimeo':
+					url: "http://vimeo.com/api/v2/balupton/videos.json"
+				'youtube':
+					#url: "http://gdata.youtube.com/feeds/base/users/balupton/uploads?alt=json&orderby=published&client=ytapi-youtube-profile"
+					url: "http://gdata.youtube.com/feeds/api/playlists/PLYVl5EnzwqsQs0tBLO6ug6WbqAbrpVbNf?alt=json"
+				#'flickr':
+				#	url: "http://api.flickr.com/services/feeds/photos_public.gne?id=35776898@N00&lang=en-us&format=json"
 
-				# tumblr
-				tumblr: url: "http://api.tumblr.com/v2/blog/#{envConfig.TUMBLR_BLOG}/posts?api_key=#{envConfig.TUMBLR_API_KEY}"
-
-				# Github
-				githubUser: url: "https://api.github.com/users/#{envConfig.GITHUB_USERNAME}?client_id=#{envConfig.GITHUB_CLIENT_ID}&client_secret=#{envConfig.GITHUB_CLIENT_SECRET}"
-				githubRepos: url: "https://api.github.com/users/#{envConfig.GITHUB_USERNAME}/repos?sort=updated&client_id=#{envConfig.GITHUB_CLIENT_ID}&client_secret=#{envConfig.GITHUB_CLIENT_SECRET}"
-}
