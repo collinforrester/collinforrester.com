@@ -1,27 +1,27 @@
 {
-  "name": "balupton.docpad",
-  "version": "1.2.5",
-  "description": "Website of Benjamin Lupton. Founder of Bevry, DocPad and HistoryJS. Aficionado of HTML5, CoffeeScript and NodeJS. Available for consulting, training and talks. ENTP.",
-  "homepage": "https://github.com/balupton/balupton.docpad",
+  "name": "collinforrester.com",
+  "version": "1.0.0",
+  "description": "Website of Collin Forrester.",
+  "homepage": "https://github.com/collinforrester/collinforrester.com",
   "keywords": [
-    "balupton",
-    "benjamin lupton",
+    "collinforrester",
+    "Collin Forrester",
     "website",
     "docpad"
   ],
-  "author": "Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
+  "author": "Collin Forrester <collin.forrester@gmail.com> (http://collinforrester.com)",
   "maintainers": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+    "Collin Forrester <collin.forrester@gmail.com> (https://github.com/collinforrester)"
   ],
   "contributors": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+    "Collin Forrester <collin.forrester@gmail.com> (https://github.com/collinforrester)"
   ],
   "bugs": {
-    "url": "https://github.com/balupton/balupton.docpad/issues"
+    "url": "https://github.com/collinforrester/collinforrester.com/issues"
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/balupton/balupton.docpad.git"
+    "url": "http://github.com/collinforrester/collinforrester.com.git"
   },
   "engines": {
     "node": "0.10",

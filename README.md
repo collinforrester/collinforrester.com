@@ -1,24 +1,26 @@
-# [Benjamin Lupton's Website](http://balupton.com), built with [DocPad](http://docpad.org)
+# [Collin Forrester's Website](http://collinforrester.com), built with [DocPad](http://docpad.org)
+
+This is my personal web page of things that I find interesting and also things I'd like to share.  It's a statically generated website using [DocPad](http://docpad.org).  If you'd like your own, follow the instructions below.
 
 
 ## Getting Started
 
-1. [Install DocPad](http://docpad.org/install) 
+1. [Install DocPad](http://docpad.org/install)
 
-1. Clone and run the server
+2. Clone and run the server
 
 	``` bash
-	git clone git://github.com/balupton/balupton.docpad.git
-	cd balupton.docpad
+	git clone git://github.com/collinforrester/collinforrester.com.git
+	cd collinforrester.docpad
 	npm install
 	docpad run
 	```
 
-1. [Open http://localhost:9778/](http://localhost:9778/)
+3. [Open http://localhost:9778/](http://localhost:9778/)
 
-1. Start hacking away by modifying the `src` directory
+4. Start hacking away by modifying the `src` directory
 
 
 ## License
 
-Unless stated otherwise; all works are Copyright © 2011+ [Benjamin Lupton](http://balupton.com) <b@lupton.cc> and licensed [permissively](http://en.wikipedia.org/wiki/Permissive_free_software_licence) under the [MIT License](http://creativecommons.org/licenses/MIT/) for code and the [Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/) for everything else (including content, media and design), enjoy!
+Unless stated otherwise; all works are Copyright © 2013+ [Collin Forrester](http://collinforrester.com) <collin.forrester@gmail.com> and licensed under the [MIT License](http://creativecommons.org/licenses/MIT/)

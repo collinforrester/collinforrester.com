@@ -33,6 +33,7 @@ html lang: 'en', ->
 		meta name: 'keywords', content: @getPreparedKeywords()
 
 		# Styles
+		link rel: 'icon', href: '/images/favicon.ico'
 		text  @getBlock('styles').toHTML()
 		link rel: 'stylesheet', href: '/styles/style.css', media: 'screen, projection'
 		link rel: 'stylesheet', href: '/styles/print.css', media: 'print'
@@ -46,7 +47,6 @@ html lang: 'en', ->
 		header '.heading', ->
 			a href:'/', title:'Return home', ->
 				h1 -> @site.text.heading
-				span '.heading-avatar', ->
 			h2 -> @site.text.subheading
 
 		# Pages

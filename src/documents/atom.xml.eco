@@ -2,8 +2,8 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 	<title><%= @site.title %></title>
 	<subtitle><%= @site.description %></subtitle>
-	<link href="http://balupton.com/atom.xml" rel="self" />
-	<link href="http://balupton.com" />
+	<link href="http://collinforrester.com/atom.xml" rel="self" />
+	<link href="http://collinforrester.com" />
 	<updated><%= @site.date.toISOString() %></updated>
 	<id><%= @site.url %></id>
 	<author>

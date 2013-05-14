@@ -2,31 +2,7 @@
 # Misc Configuration
 
 envConfig = process.env
-githubAuthString = "client_id=#{envConfig.BALUPTON_GITHUB_CLIENT_ID}&client_secret=#{envConfig.BALUPTON_GITHUB_CLIENT_SECRET}"
-getRankInUsers = (users, fallback=null) ->
-	rank = null
-
-	for user,index in users
-		if user.login is 'balupton'
-			rank = String(index+1)
-			break
-
-	return fallback  if rank is null
-
-	if rank >= 10 and rank < 20
-		rank += 'th'
-	else switch rank.substr(-1)
-		when '1'
-			rank += 'st'
-		when '2'
-			rank += 'nd'
-		when '3'
-			rank += 'rd'
-		else
-			rank += 'th'
-
-	return rank or fallback
-
+githubAuthString = "client_id=#{envConfig.GITHUB_CLIENT_ID}&client_secret=#{envConfig.GITHUB_CLIENT_SECRET}"
 
 # =================================
 # DocPad Configuration
@@ -42,26 +18,27 @@ module.exports =
 	templateData:
 		# Site Data
 		site:
-			url: "http://balupton.com"
-			title: "Benjamin Lupton"
-			author: "Benjamin Lupton"
-			email: "b@lupton.cc"
+			url: "http://collinforrester.com"
+			title: "Collin Forrester"
+			author: "Collin Forrester"
+			email: "collin.forrester@gmail.com"
 			description: """
-				Website of Benjamin Lupton. Founder of Bevry, DocPad and HistoryJS. Aficionado of HTML5, CoffeeScript and NodeJS. Available for consulting, training and talks. ENTP.
+				Website of Collin Forrester.  Mobile, web, and food developer. AngularJS, NodeJS, and Android enthusiast.
 				"""
 			keywords: """
-				balupton, benjamin lupton, lupton, coffeescript, node.js, javascript, history.js, html5, docpad, nowpad, jquery, css3, ruby, git, nosql, cson, html5 history api, ajax, html, web development, web design, nlp, git, neuro-linguistic programming, programming, hacking, hackathon, aloha editor, contenteditable, hallo, jekyll, entp, inventor, web 2.0
+				Collin Forrester, forrester, coffeescript, node.js, javascript, html5, docpad, nowpad, jquery, css3, angularjs, git, nosql, cson, html5 history api, ajax, html, web development, web design, nlp, git, neuro-linguistic programming, programming, hacking, hackathon, aloha editor, contenteditable, hallo, jekyll, entp, inventor, web 2.0
 				"""
 
 			text:
-				heading: "Benjamin Lupton"
+				heading: "Collin Forrester"
 				subheading: '''
 					<t render="html.coffee">
 						link = @getPreparedLink.bind(@)
 						text """
-							Founder of #{link 'bevry'}, #{link 'docpad'}, #{link 'historyjs'}  &amp; #{link 'hostel'}.<br/>
-							Aficionado of #{link 'javascript'}, #{link 'nodejs'}, #{link 'opensource'} and #{link 'html5'}.<br/>
-							Available for consulting, training and speaking. #{link 'contact'}.
+							#{link 'angular'}, #{link 'javascript'}, #{link 'nodejs'}  &amp; #{link 'android'} enthusiast.<br/>
+							Web, mobile, and food developer.<br/>
+							<br/>
+							#{link 'contact'}.
 							"""
 					</t>
 					'''
@@ -75,34 +52,26 @@ module.exports =
 					'''
 				copyright: '''
 					<t render="html.md">
-						Unless stated otherwise; all works are Copyright © 2011+ [Benjamin Lupton](http://balupton.com) and licensed [permissively](http://en.wikipedia.org/wiki/Permissive_free_software_licence) under the [MIT License](http://creativecommons.org/licenses/MIT/) for code and the [Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/) for everything else (including content, media and design), enjoy!
+						Unless stated otherwise; all works are Copyright © 2013+ [Collin Forrester](http://collinforrester.com) and licensed under the [MIT License](http://creativecommons.org/licenses/MIT/)
 					</t>
 					'''
 
 			services:
-				facebookLikeButton:
-					applicationId: '266367676718271'
-				facebookFollowButton:
-					applicationId: '266367676718271'
-					username: 'balupton'
-				twitterTweetButton: "balupton"
-				twitterFollowButton: "balupton"
-				githubFollowButton: "balupton"
-				quoraFollowButton: "Benjamin-Lupton"
-				disqus: 'balupton'
-				gauges: '5077ae93f5a1f5067b000028'
-				googleAnalytics: 'UA-4446117-1'
-				reinvigorate: '52uel-236r9p108l'
+				twitterTweetButton: "cforrester07"
+				twitterFollowButton: "cforrester07"
+				githubFollowButton: "collinforrester"
+				disqus: 'collinforrester'
+				googleAnalytics: 'UA-36540785-1'
+				facebookLike: false
+				facebookFollowButton: false
+				redditSubmit: false
+				hackerNewsSubmit: false
 
 			social:
 				"""
-				flattr
-				facebook
 				linkedin
 				github
 				twitter
-				youtube
-				vimeo
 				""".trim().split('\n')
 
 			scripts: """
@@ -112,19 +81,10 @@ module.exports =
 				""".trim().split('\n')
 
 			feeds: [
-					href: 'http://feeds.feedburner.com/balupton.atom'
-					title: 'Blog Posts'
-				,
-					href: 'https://github.com/balupton.atom'
+					href: 'https://github.com/collinforrester.atom'
 					title: 'GitHub Activity'
 				,
-					href: 'http://vimeo.com/api/v2/balupton/videos.atom'
-					title: 'Vimeo Videos'
-				,
-					href: 'http://api.flickr.com/services/feeds/photos_public.gne?id=35776898@N00&lang=en-us&format=atom'
-					title: 'Flickr Photos'
-				,
-					href: 'https://api.twitter.com/1/statuses/user_timeline.atom?screen_name=balupton&count=20&include_entities=true&include_rts=true'
+					href: 'https://api.twitter.com/1/statuses/user_timeline.atom?screen_name=cforrester07&count=20&include_entities=true&include_rts=true'
 					title: 'Tweets'
 			]
 
@@ -148,9 +108,17 @@ module.exports =
 					text: 'DocPad'
 					url: 'http://docpad.org'
 					title: 'Visit Website'
+				android:
+					text: 'Android',
+					url: 'http://developer.android.com'
+					title: 'Visit Website'
 				hostel:
 					text: 'Startup Hostel'
 					url: 'http://startuphostel.org'
+					title: 'Visit Website'
+				angular:
+					text: 'AngularJS'
+					url: 'http://angularjs.org'
 					title: 'Visit Website'
 				backbonejs:
 					text: 'Backbone.js'
@@ -184,21 +152,21 @@ module.exports =
 					text: 'Node.js'
 					url: 'http://nodejs.org/'
 					title: 'Visit Website'
-				balupton:
-					text: 'Benjamin Lupton'
-					url: 'http://balupton.com'
+				collinforrester:
+					text: 'Collin Forrester'
+					url: 'http://collinforrester.com'
 					title: 'Visit Website'
 				author:
-					text: 'Benjamin Lupton'
-					url: 'http://balupton.com'
+					text: 'Collin Forrester'
+					url: 'http://collinforrester.com'
 					title: 'Visit Website'
 				source:
 					text: 'open-source'
-					url: 'https://github.com/balupton/balupton.docpad'
+					url: 'https://github.com/collinforrester/collinforrester.docpad'
 					title: 'View Website Source'
 				contact:
 					text: 'Contact'
-					url: 'mailto:b@bevry.me'
+					url: 'mailto:collin.forrester@gmail.com'
 					title: 'Contact me'
 					cssClass: 'contact-button'
 
@@ -216,28 +184,6 @@ module.exports =
 		getPreparedEmail: -> @document.email or @site.email
 		getPreparedDescription: -> @document.description or @site.description
 		getPreparedKeywords: -> @site.keywords.concat(@document.keywords or []).join(', ')
-
-		# Ranking Helpers
-		getAustraliaJavaScriptRank: ->
-			feed = @feedr.feeds['github-australia-javascript']?.users ? null
-			return getRankInUsers(feed,'2nd')
-		getAustraliaRank: ->
-			feed = @feedr.feeds['github-australia']?.users ? null
-			return getRankInUsers(feed,'4th')
-		getGithubFollowers: (floorToNearest=50) ->
-			followers = @feedr.feeds['github-profile']?.followers
-			if followers
-				result = Math.floor(followers/floorToNearest)*floorToNearest
-			else
-				result = 250
-			return result
-		getStackoverflowReputation: (floorToNearest=1000) ->
-			reputation = @feedr.feeds['stackoverflow-profile']?.users?[0]?.reputation ? null
-			if reputation
-				result = Math.floor(reputation/floorToNearest)*floorToNearest
-			else
-				result = 9000
-			return result
 
 
 	# =================================
@@ -265,8 +211,8 @@ module.exports =
 
 			# Redirect Middleware
 			docpadServer.use (req,res,next) ->
-				if req.headers.host in ['www.balupton.com','lupton.cc','www.lupton.cc','balupton.no.de','balupton.herokuapp.com']
-					res.redirect 301, 'http://balupton.com'+req.url
+				if req.headers.host in ['www.collinforrester.com']
+					res.redirect 301, 'http://collinforrester.com'+req.url
 				else
 					next()
 
@@ -276,29 +222,21 @@ module.exports =
 			# Demos
 			docpadServer.get /^\/sandbox(?:\/([^\/]+).*)?$/, (req, res) ->
 				project = req.params[0]
-				res.redirect 301, "http://balupton.github.com/#{project}/demo/"
+				res.redirect 301, "http://collinforrester.github.com/#{project}/demo/"
 				# ^ github pages don't have https
 
 			# Projects
 			docpadServer.get /^\/projects\/(.*)$/, (req, res) ->
 				project = req.params[0] or ''
-				res.redirect 301, "https://github.com/balupton/#{project}"
+				res.redirect 301, "https://github.com/collinforrester/#{project}"
 
 			docpadServer.get /^\/(?:g|gh|github)(?:\/(.*))?$/, (req, res) ->
 				project = req.params[0] or ''
-				res.redirect 301, "https://github.com/balupton/#{project}"
+				res.redirect 301, "https://github.com/collinforrester/#{project}"
 
 			# Twitter
 			docpadServer.get /^\/(?:t|twitter|tweet)(?:\/(.*))?$/, (req, res) ->
-				res.redirect 301, "https://twitter.com/balupton"
-
-			# Sharing Feed
-			docpadServer.get /^\/feeds?\/shar(e|ing)(?:\/(.*))?$/, (req, res) ->
-				res.redirect 301, "http://feeds.feedburner.com/balupton/shared"
-
-			# Feeds
-			docpadServer.get /^\/feeds?(?:\/(.*))?$/, (req, res) ->
-				res.redirect 301, "http://feeds.feedburner.com/balupton"
+				res.redirect 301, "https://twitter.com/cforrester07"
 
 
 	# =================================
@@ -307,29 +245,16 @@ module.exports =
 	plugins:
 		feedr:
 			feeds:
-				'stackoverflow-profile':
-					url: 'http://api.stackoverflow.com/1.0/users/130638/'
-				'github-australia-javascript':
-					url: "https://api.github.com/legacy/user/search/location:Australia%20language:JavaScript?#{githubAuthString}"
-				'github-australia':
-					url: "https://api.github.com/legacy/user/search/location:Australia?#{githubAuthString}"
-					# https://github.com/search?q=location%3AAustralia&type=Users&s=followers
 				'github-profile':
-					url: "https://api.github.com/users/balupton?#{githubAuthString}"
-				'balupton-projects':
-					url: "https://api.github.com/users/balupton/repos?per_page=100&#{githubAuthString}"
-				'bevry-projects':
-					url: "https://api.github.com/users/bevry/repos?per_page=100&#{githubAuthString}"
-				'browserstate-projects':
-					url: "https://api.github.com/users/browserstate/repos?per_page=100&#{githubAuthString}"
-				'docpad-projects':
-					url: "https://api.github.com/users/docpad/repos?per_page=100&#{githubAuthString}"
+					url: "https://api.github.com/users/collinforrester?#{githubAuthString}"
+				'collinforrester-projects':
+					url: "https://api.github.com/users/collinforrester/repos?per_page=100&#{githubAuthString}"
 				#'flattr':
 				#	url: 'https://api.flattr.com/rest/v2/users/balupton/activities.atom'
 				'github':
-					url: "https://github.com/balupton.atom"
+					url: "https://github.com/collinforrester.atom"
 				'twitter':
-					url: "https://api.twitter.com/1/statuses/user_timeline.json?screen_name=balupton&count=20&include_entities=true&include_rts=true"
+					url: "https://api.twitter.com/1/statuses/user_timeline.json?screen_name=cforrester07&count=20&include_entities=true&include_rts=true"
 				'vimeo':
 					url: "http://vimeo.com/api/v2/balupton/videos.json"
 				'youtube':
